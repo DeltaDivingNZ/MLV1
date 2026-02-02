@@ -1,16 +1,22 @@
-// tailwind.config.js
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './app/**/*.{js,ts,jsx,tsx}',   // pages & components in app/
-    './components/**/*.{js,ts,jsx,tsx}', // if you have a separate components folder
+    './app/**/*.{js,ts,jsx,tsx}',
+    './app/components/**/*.{js,ts,jsx,tsx}'
   ],
   theme: {
     extend: {
       colors: {
-        delta: { blue: '#006bb3', green: '#009957', dark: '#111827' },
+        delta: {
+          blue: '#006bb3',
+          green: '#009957',
+          dark: '#111827'
+        }
       },
-      fontFamily: { sans: ['Inter', 'sans-serif'] },
-    },
+      fontFamily: {
+        sans: ['Inter', 'sans-serif']
+      }
+    }
   },
   plugins: [],
 };
