@@ -3,7 +3,9 @@ import Link from "next/link";
 import { useState } from "react";
 
 export default function Navbar() {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false); // Desktop Services dropdown
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false); // Mobile menu toggle
+  const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false); // Mobile Services dropdown
 
   return (
     <nav className="fixed top-0 w-full z-50">
@@ -18,7 +20,7 @@ export default function Navbar() {
           Delta Detailing
         </div>
 
-        {/* Nav links */}
+        {/* Desktop nav links */}
         <ul className="hidden md:flex items-center space-x-6">
           <li>
             <Link href="/" className="hover:underline">
@@ -40,7 +42,6 @@ export default function Navbar() {
                 dropdownOpen ? "opacity-100 visible" : "opacity-0 invisible"
               }`}
               style={{
-                // Maintain your original navbar dropdown styles
                 backgroundColor: "#1e1e1e",
                 borderRadius: "0.25rem",
                 boxShadow: "0 8px 20px rgba(0,0,0,0.35)",
@@ -84,10 +85,84 @@ export default function Navbar() {
         </ul>
 
         {/* Mobile hamburger */}
-        <div className="md:hidden">
-          {/* Keep your existing mobile menu code */}
+        <div className="md:hidden flex items-center">
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="focus:outline-none"
+          >
+            <svg
+              className="w-6 h-6 text-[#538e79]"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d={mobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
+              />
+            </svg>
+          </button>
         </div>
       </div>
+
+      {/* Mobile menu */}
+      {mobileMenuOpen && (
+        <ul className="md:hidden bg-[#0e0e0e] px-4 pb-4 space-y-2 shadow-md">
+          <li>
+            <Link href="/" className="block py-2 hover:text-[#538e79]">
+              Home
+            </Link>
+          </li>
+
+          {/* Mobile Services dropdown */}
+          <li>
+            <button
+              onClick={() => setMobileDropdownOpen(!mobileDropdownOpen)}
+              className="w-full text-left py-2 flex justify-between items-center hover:text-[#538e79]"
+            >
+              Services
+              <span className="ml-2">{mobileDropdownOpen ? "▲" : "▼"}</span>
+            </button>
+            {mobileDropdownOpen && (
+              <ul className="pl-4 mt-1 space-y-1">
+                <li>
+                  <Link href="/detailing" className="block py-1 hover:text-[#538e79]">
+                    Detailing
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/paint-correction" className="block py-1 hover:text-[#538e79]">
+                    Paint Correction
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/ceramic-coating" className="block py-1 hover:text-[#538e79]">
+                    Ceramic Coating
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/other-services" className="block py-1 hover:text-[#538e79]">
+                    Other Services
+                  </Link>
+                </li>
+              </ul>
+            )}
+          </li>
+
+          <li>
+            <Link href="/about" className="block py-2 hover:text-[#538e79]">
+              About
+            </Link>
+          </li>
+          <li>
+            <Link href="/booking" className="block py-2 hover:text-[#538e79]">
+              Book
+            </Link>
+          </li>
+        </ul>
+      )}
     </nav>
   );
 }
