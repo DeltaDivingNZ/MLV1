@@ -1,18 +1,31 @@
 "use client";
+
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
 export default function Navbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false); // Desktop Services dropdown
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false); // Mobile menu toggle
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false); // Mobile menu
   const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false); // Mobile Services dropdown
 
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false);
+    setMobileDropdownOpen(false);
+  };
+
   return (
-    <nav className="fixed top-0 w-full z-50">
-      <div className="bg-[#0e0e0e] max-w-6xl mx-auto px-4 flex justify-between items-center h-16 relative">
+    <nav className="fixed top-0 w-full z-50 bg-[#0e0e0e] shadow-md">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 flex justify-between items-center h-20 relative">
         {/* Logo */}
         <div className="flex items-center">
-          <img src="/logo.png" alt="Logo" className="h-12 w-12 object-contain" />
+          <Image
+            src="/logo.png"
+            alt="Logo"
+            height={80} // matches h-20 navbar
+            width={80}  // scales naturally
+            className="object-contain"
+          />
         </div>
 
         {/* Centered title */}
@@ -28,7 +41,7 @@ export default function Navbar() {
             </Link>
           </li>
 
-          {/* Services dropdown */}
+          {/* Desktop Services dropdown */}
           <li
             className="relative"
             onMouseEnter={() => setDropdownOpen(true)}
@@ -76,7 +89,6 @@ export default function Navbar() {
               About
             </Link>
           </li>
-
           <li>
             <Link href="/booking" className="hover:underline">
               Book
@@ -100,7 +112,11 @@ export default function Navbar() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth={2}
-                d={mobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
+                d={
+                  mobileMenuOpen
+                    ? "M6 18L18 6M6 6l12 12"
+                    : "M4 6h16M4 12h16M4 18h16"
+                }
               />
             </svg>
           </button>
@@ -111,7 +127,7 @@ export default function Navbar() {
       {mobileMenuOpen && (
         <ul className="md:hidden bg-[#0e0e0e] px-4 pb-4 space-y-2 shadow-md">
           <li>
-            <Link href="/" className="block py-2 hover:text-[#538e79]">
+            <Link href="/" className="block py-2 hover:text-[#538e79]" onClick={closeMobileMenu}>
               Home
             </Link>
           </li>
@@ -128,22 +144,38 @@ export default function Navbar() {
             {mobileDropdownOpen && (
               <ul className="pl-4 mt-1 space-y-1">
                 <li>
-                  <Link href="/detailing" className="block py-1 hover:text-[#538e79]">
+                  <Link
+                    href="/detailing"
+                    className="block py-1 hover:text-[#538e79]"
+                    onClick={closeMobileMenu}
+                  >
                     Detailing
                   </Link>
                 </li>
                 <li>
-                  <Link href="/paint-correction" className="block py-1 hover:text-[#538e79]">
+                  <Link
+                    href="/paint-correction"
+                    className="block py-1 hover:text-[#538e79]"
+                    onClick={closeMobileMenu}
+                  >
                     Paint Correction
                   </Link>
                 </li>
                 <li>
-                  <Link href="/ceramic-coating" className="block py-1 hover:text-[#538e79]">
+                  <Link
+                    href="/ceramic-coating"
+                    className="block py-1 hover:text-[#538e79]"
+                    onClick={closeMobileMenu}
+                  >
                     Ceramic Coating
                   </Link>
                 </li>
                 <li>
-                  <Link href="/other-services" className="block py-1 hover:text-[#538e79]">
+                  <Link
+                    href="/other-services"
+                    className="block py-1 hover:text-[#538e79]"
+                    onClick={closeMobileMenu}
+                  >
                     Other Services
                   </Link>
                 </li>
@@ -152,12 +184,20 @@ export default function Navbar() {
           </li>
 
           <li>
-            <Link href="/about" className="block py-2 hover:text-[#538e79]">
+            <Link
+              href="/about"
+              className="block py-2 hover:text-[#538e79]"
+              onClick={closeMobileMenu}
+            >
               About
             </Link>
           </li>
           <li>
-            <Link href="/booking" className="block py-2 hover:text-[#538e79]">
+            <Link
+              href="/booking"
+              className="block py-2 hover:text-[#538e79]"
+              onClick={closeMobileMenu}
+            >
               Book
             </Link>
           </li>
