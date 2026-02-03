@@ -89,22 +89,34 @@ export default function BookingPage() {
           </div>
         </div>
 
-        {/* Services Multi-Select */}
+        {/* Multi-select services */}
         <div>
-          <label className="block mb-1">Select Service(s)</label>
-          <div className="flex flex-col gap-2 p-2 bg-[#111] rounded max-h-60 overflow-y-auto">
-            {services.map((service) => (
-              <label key={service} className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  name="services"
-                  value={service}
-                  checked={selectedServices.includes(service)}
-                  onChange={() => handleCheckboxChange(service)}
-                />
-                {service}
-              </label>
-            ))}
+          <label className="block mb-1 font-semibold">Select Service(s)</label>
+          <div className="relative">
+            <div
+              className="border rounded px-3 py-2 cursor-pointer"
+              onClick={() => setShowServices(!showServices)}
+            >
+              {selectedServices.length > 0
+                ? selectedServices.join(", ")
+                : "Select service(s) ▼"}
+            </div>
+            {showServices && (
+              <div className="absolute z-10 w-full border rounded bg-[#151b18] mt-1 max-h-60 overflow-y-auto shadow-lg p-2">
+                {servicesList.map((service) => (
+                  <label key={service} className="flex items-center gap-2 mb-2 cursor-pointer text-[#538e79]">
+                    <input
+                      type="checkbox"
+                      name="services"
+                      value={service}
+                      checked={selectedServices.includes(service)}
+                      onChange={() => toggleService(service)}
+                    />
+                    {service}
+                  </label>
+                ))}
+              </div>
+            )}
           </div>
         </div>
 
