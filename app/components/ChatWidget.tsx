@@ -1,18 +1,17 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 
-// Explicit Message type
 interface Message {
   role: "user" | "assistant";
   text: string;
-  type?: "text" | "cta"; // optional, used for booking CTAs
+  type?: "text" | "cta";
 }
 
 export default function ChatWidget() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      text: "Hey! 👋 I can help with pricing, packages, or bookings. What are you looking to get done today?",
+      text: "Hey! 👋 I can help with pricing, packages, or bookings. What would you like to know?",
       type: "text",
     },
   ]);
@@ -23,14 +22,12 @@ export default function ChatWidget() {
 
   useEffect(() => bottomRef.current?.scrollIntoView({ behavior: "smooth" }), [messages]);
 
-  // Quick replies for first message
   const quickReplies = ["Pricing", "Packages", "Book a detail"];
 
   const sendMessage = async (msg?: string) => {
     const text = msg || input;
     if (!text.trim()) return;
 
-    // Create a typed user message
     const userMessage: Message = { role: "user", text, type: "text" };
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
@@ -42,14 +39,18 @@ export default function ChatWidget() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: text }),
       });
+
       const data = await res.json();
 
-      // Typed assistant message
-      const assistantMessage: Message = { role: "assistant", text: data.reply, type: "text" };
+      const assistantMessage: Message = {
+        role: "assistant",
+        text: data.reply || "Sorry, I didn’t catch that.",
+        type: "text",
+      };
 
       const updatedMessages: Message[] = [...messages, userMessage, assistantMessage];
 
-      // Check if user intent shows booking interest
+      // Trigger booking CTA for relevant keywords
       const bookingKeywords = ["book", "booking", "quote", "schedule"];
       const triggerBooking = bookingKeywords.some((kw) => text.toLowerCase().includes(kw));
 
@@ -77,7 +78,6 @@ export default function ChatWidget() {
 
   return (
     <>
-      {/* Floating Button */}
       <button
         onClick={() => setOpen(!open)}
         className="fixed bottom-6 right-6 bg-blue-600 text-white w-14 h-14 rounded-full shadow-lg flex items-center justify-center text-2xl z-50"
@@ -86,16 +86,13 @@ export default function ChatWidget() {
         💬
       </button>
 
-      {/* Chat Window */}
       {open && (
         <div className="fixed bottom-20 right-6 w-80 max-w-full h-96 bg-white shadow-lg rounded-lg flex flex-col overflow-hidden z-50">
-          {/* Header */}
           <div className="bg-blue-600 text-white p-2 font-bold flex justify-between items-center">
             Delta Detailing
             <button onClick={() => setOpen(false)}>✕</button>
           </div>
 
-          {/* Messages */}
           <div className="flex-1 p-2 overflow-y-auto flex flex-col space-y-1">
             {messages.map((m, idx) => (
               <div
@@ -108,7 +105,6 @@ export default function ChatWidget() {
               >
                 {m.text}
 
-                {/* CTA buttons */}
                 {m.type === "cta" && (
                   <div className="mt-2 flex flex-col space-y-1">
                     <a
@@ -130,7 +126,6 @@ export default function ChatWidget() {
               </div>
             ))}
 
-            {/* Quick replies (only under first message) */}
             {messages.length === 1 && (
               <div className="flex space-x-2 mt-2 flex-wrap">
                 {quickReplies.map((qr) => (
@@ -149,7 +144,6 @@ export default function ChatWidget() {
             <div ref={bottomRef} />
           </div>
 
-          {/* Input */}
           <div className="p-2 flex border-t">
             <input
               className="flex-1 border rounded p-1 text-black"
