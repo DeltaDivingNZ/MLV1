@@ -11,7 +11,7 @@ export default function ChatWidget() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      text: "Hey! 👋 I can help with pricing, packages, or bookings. What would you like to know?",
+      text: "Hey! 👋 I can help with Pricing, Packages, or Book a detail. What would you like to know?",
       type: "text",
     },
   ]);
@@ -34,24 +34,24 @@ export default function ChatWidget() {
     setLoading(true);
 
     try {
+      // Call our static API
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: text }),
       });
-
       const data = await res.json();
 
       const assistantMessage: Message = {
         role: "assistant",
-        text: data.reply || "Sorry, I didn’t catch that.",
+        text: data.reply || "Sorry, I didn’t understand that.",
         type: "text",
       };
 
       const updatedMessages: Message[] = [...messages, userMessage, assistantMessage];
 
-      // Trigger booking CTA for relevant keywords
-      const bookingKeywords = ["book", "booking", "quote", "schedule"];
+      // Show CTA if relevant
+      const bookingKeywords = ["book", "booking", "quote"];
       const triggerBooking = bookingKeywords.some((kw) => text.toLowerCase().includes(kw));
 
       if (triggerBooking) {
