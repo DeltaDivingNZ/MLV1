@@ -19,10 +19,7 @@ const montserrat = Montserrat({
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="en"
-      className={`${playfair.variable} ${montserrat.variable}`}
-    >
+    <html lang="en" className={`${playfair.variable} ${montserrat.variable}`}>
       <body className="font-body bg-[#0b0b0b] text-white">
         <Navbar />
         <main className="pt-20">{children}</main>
