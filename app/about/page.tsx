@@ -1,6 +1,5 @@
 "use client";
 
-import type { Metadata } from "next";
 import { useState } from "react";
 import TestimonialsSlider from "../components/TestimonialsSlider";
 
@@ -43,29 +42,6 @@ const faqs = [
     answer: "Every vehicle is different. We offer tailored recommendations based on your car’s condition, your goals, and your budget. Whether you want protection, restoration, or a complete transformation, we’ll guide you to the perfect service."
   }
 ];
-
-// --- Open Graph / Page Metadata ---
-export const metadata: Metadata = {
-  title: "About Delta Detailing | Premium Car Detailing NZ",
-  description:
-    "Delta Detailing is the premium choice for vehicle owners in Manawatū–Rangitīkei. Learn about our services, expertise, and dedication to excellence.",
-  openGraph: {
-    title: "About Delta Detailing | Premium Car Detailing NZ",
-    description:
-      "Discover Delta Detailing: professional automotive care with over 10 years of experience. Mobile services available for luxury-level results at your location.",
-    url: "https://www.deltadetailing.co.nz/about",
-    siteName: "Delta Detailing",
-    images: [
-      {
-        url: "https://www.deltadetailing.co.nz/services/interior-ultimate.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Interior Ultimate Detail by Delta Detailing",
-      },
-    ],
-    type: "website",
-  },
-};
 
 export default function AboutPage() {
   const [activeFAQ, setActiveFAQ] = useState<number | null>(null);
