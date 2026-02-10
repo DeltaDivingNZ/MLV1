@@ -1,10 +1,37 @@
 export default function Footer() {
   return (
-    <footer className="bg-blue text-[#8aa4b2] text-center p-4 mt-10 space-y-2">
-      &copy; 2026 Delta Detailing. All rights reserved.
-      <p>Phone: 021 0629 237 | Email: <a href="mailto:deltadetailingnz@gmail.com" className="underline">deltadetailingnz@gmail.com</a></p>
-      <p>Address: 12 Kereru Court, Marton 4710</p>
-      <p>Facebook: <a href="https://www.facebook.com/deltadetailingnz" target="_blank" className="underline">Facebook.com/deltadetailingnz</a></p>
+    <footer className="bg-green-900 text-white/80 text-center p-6 mt-10 space-y-3">
+      <p className="font-semibold text-white">
+        &copy; {new Date().getFullYear()} Matt’s Lawns. All rights reserved.
+      </p>
+
+      <p>
+        Phone:{" "}
+        <a href="tel:0210000000" className="underline hover:text-white">
+          021 000 0000
+        </a>{" "}
+        | Email:{" "}
+        <a
+          href="mailto:mattslawns@gmail.com"
+          className="underline hover:text-white"
+        >
+          mattslawns@gmail.com
+        </a>
+      </p>
+
+      <p>Serving Orewa to Army Bay</p>
+
+      <p>
+        Facebook:{" "}
+        <a
+          href="https://www.facebook.com/mattslawns"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline hover:text-white"
+        >
+          facebook.com/mattslawns
+        </a>
+      </p>
     </footer>
   );
 }
