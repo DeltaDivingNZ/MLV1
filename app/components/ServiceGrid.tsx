@@ -3,70 +3,80 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const services = [
+const coreServices = [
   {
-    title: "Exterior Detailing",
-    image: "/services/exterior.jpg",
-    href: "/detailing#exterior",
+    title: "Lawn Mowing",
+    description:
+      "Regular and one-off lawn mowing with clean edges, tidy finishes, and a healthy, even cut.",
+    image: "/images/lawn-mowing.jpg",
+    href: "/lawn-mowing",
   },
   {
-    title: "Interior Detailing",
-    image: "/services/interior.jpg",
-    href: "/detailing#interior",
+    title: "Hedge Trimming",
+    description:
+      "Precise trimming and shaping of hedges and shrubs for a neat and healthy garden.",
+    image: "/images/hedge-trimming.jpg",
+    href: "/hedge-trimming",
   },
   {
-    title: "Paint Correction",
-    image: "/services/paint.jpg",
-    href: "/paint-correction",
-  },
-  {
-    title: "Ceramic Coating",
-    image: "/services/ceramic.jpg",
-    href: "/ceramic-coating",
-  },
-  {
-    title: "Headlight Restoration",
-    image: "/services/headlights.jpg",
-    href: "/other-services#headlights",
-  },
-  {
-    title: "Other Services",
-    image: "/services/other.jpg",
-    href: "/other-services",
+    title: "General Gardening",
+    description:
+      "Weeding, garden clean-ups, green waste removal, and light maintenance to keep your garden looking great.",
+    image: "/images/general-gardening.jpg",
+    href: "/general-gardening",
   },
 ];
 
 export default function ServiceGrid() {
   return (
-    <section className="bg-[#0e0e0e] py-24 font-montserrat">
-      <h2 className="text-4xl font-bold text-center text-[#538e79] mb-16 font-playfair">
-        Our Services
-      </h2>
+    <section className="py-20 bg-[#f6faf7] font-body text-[#1f2933]">
+      <div className="max-w-7xl mx-auto px-6 space-y-16">
 
-      <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-10 px-6">
-        {services.map((service) => (
-          <Link
-            key={service.title}
-            href={service.href}
-            className="group block rounded-xl overflow-hidden bg-[#161616]"
-          >
-            <div className="relative h-80">
-              <Image
-                src={service.image}
-                alt={service.title}
-                fill
-                className="object-cover group-hover:scale-105 transition"
-              />
-              <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition" />
-            </div>
+        {/* Header */}
+        <div className="text-center space-y-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-green-700">
+            Our Services
+          </h2>
+          <p className="max-w-2xl mx-auto text-lg text-[#4b5563]">
+            Helping you maintain a healthy, tidy, and beautiful garden.
+          </p>
+        </div>
 
-            <div className="p-6 text-center">
-              <h3 className="text-2xl font-semibold text-[#93afbd] group-hover:text-[#538e79] transition font-playfair">
-                {service.title}
-              </h3>
+        {/* Grid */}
+        <div className="grid md:grid-cols-3 gap-10">
+          {coreServices.map((service) => (
+            <div
+              key={service.title}
+              className="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden flex flex-col"
+            >
+              <div className="relative h-56 w-full">
+                <Image
+                  src={service.image}
+                  alt={service.title}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+
+              <div className="p-6 flex-1 space-y-4">
+                <h3 className="text-2xl font-bold text-green-700">
+                  {service.title}
+                </h3>
+                <p className="text-[#4b5563]">{service.description}</p>
+              </div>
+
+              <div className="p-6 pt-0">
+                <Link
+                  href={service.href}
+                  className="inline-block text-green-700 font-semibold hover:underline"
+                >
+                  Learn More →
+                </Link>
+              </div>
             </div>
-          </Link>
-        ))}
+          ))}
+        </div>
+
       </div>
     </section>
   );

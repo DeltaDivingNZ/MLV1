@@ -1,31 +1,51 @@
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+
 export default function Hero() {
   return (
-    <section
-      className="relative min-h-screen flex items-center justify-center"
-      style={{
-        backgroundImage: "url('/hero.jpg')",
-        backgroundSize: "cover",
-        backgroundPosition: "center"
-      }}
-    >
-      <div className="absolute inset-0 bg-black/60" />
+    <section className="relative w-full h-[600px] md:h-[700px] lg:h-[800px]">
+      
+      {/* Background image */}
+      <Image
+        src="/images/hero-lawn.jpg"
+        alt="Lush green lawn being mowed"
+        fill
+        className="object-cover"
+        priority
+      />
 
-      <div className="relative text-center max-w-3xl px-6">
-        <h1 className="text-5xl md:text-6xl font-bold text-white">
-          Restore Your Car’s Showroom Shine
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-green-800/30" />
+
+      {/* Hero content */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 space-y-6">
+        
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white drop-shadow-lg">
+          Matt’s Lawns
         </h1>
 
-        <p className="mt-6 text-xl text-[#93afbd]">
-          Inside & out — Manawatū–Rangitīkei. Mobile or Marton based.
+        <p className="max-w-2xl text-lg md:text-xl text-white/90">
+          Professional lawn care and gardening services to keep your property neat, healthy, and looking its best.
         </p>
 
-        <a
-          href="/booking"
-          className="inline-block mt-10 bg-[#538e79] hover:bg-[#437564] text-white px-10 py-4 rounded-lg transition"
-        >
-          Book Online
-        </a>
+        <div className="space-x-4">
+          <Link
+            href="/quote"
+            className="inline-block bg-green-700 text-white px-6 py-3 rounded font-semibold hover:bg-green-800 transition"
+          >
+            Get a Free Quote
+          </Link>
+          <Link
+            href="/services"
+            className="inline-block bg-white text-green-700 px-6 py-3 rounded font-semibold hover:bg-gray-100 transition"
+          >
+            Explore Services
+          </Link>
+        </div>
       </div>
+
     </section>
   );
 }

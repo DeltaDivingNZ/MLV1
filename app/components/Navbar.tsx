@@ -17,9 +17,9 @@ export default function Navbar() {
 
   const navItems = [
     { label: "Home", href: "/" },
-    { label: "Services", href: "/detailing", hasDropdown: true },
+    { label: "Services", href: "/lawn-mowing", hasDropdown: true },
     { label: "About", href: "/about" },
-    { label: "Book", href: "/booking" },
+    { label: "Get a Quote", href: "/quote" },
   ];
 
   return (
@@ -40,9 +40,9 @@ export default function Navbar() {
         {/* Centered title */}
         <Link
           href="/"
-          className="absolute left-1/2 transform -translate-x-1/2 font-bold text-[#538e79] text-2xl whitespace-nowrap"
+          className="absolute left-1/2 transform -translate-x-1/2 font-bold text-green-700 text-2xl whitespace-nowrap"
         >
-          Delta Detailing
+          Matt's Lawns
         </Link>
 
         {/* Desktop nav */}
@@ -88,25 +88,21 @@ export default function Navbar() {
                     }}
                   >
                     <li>
-                      <Link href="/detailing" className="block px-4 py-2 hover:bg-[#538e79]/20">
-                        Detailing
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/paint-correction" className="block px-4 py-2 hover:bg-[#538e79]/20">
-                        Paint Correction
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/ceramic-coating" className="block px-4 py-2 hover:bg-[#538e79]/20">
-                        Ceramic Coating
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/other-services" className="block px-4 py-2 hover:bg-[#538e79]/20">
-                        Other Services
-                      </Link>
-                    </li>
+  <Link href="/lawn-mowing" className="block px-4 py-2 hover:bg-[#538e79]/20">
+    Lawn Mowing
+  </Link>
+</li>
+<li>
+  <Link href="/hedge-trimming" className="block px-4 py-2 hover:bg-[#538e79]/20">
+    Hedge Trimming
+  </Link>
+</li>
+<li>
+  <Link href="/general-gardening" className="block px-4 py-2 hover:bg-[#538e79]/20">
+    General Gardening
+  </Link>
+</li>
+
                   </ul>
                 )}
               </li>
@@ -159,41 +155,21 @@ export default function Navbar() {
                   {mobileDropdownOpen && (
                     <ul className="pl-4 mt-1 space-y-1">
                       <li>
-                        <Link
-                          href="/detailing"
-                          className="block py-1 hover:text-[#538e79]"
-                          onClick={closeMobileMenu}
-                        >
-                          Detailing
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          href="/paint-correction"
-                          className="block py-1 hover:text-[#538e79]"
-                          onClick={closeMobileMenu}
-                        >
-                          Paint Correction
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          href="/ceramic-coating"
-                          className="block py-1 hover:text-[#538e79]"
-                          onClick={closeMobileMenu}
-                        >
-                          Ceramic Coating
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          href="/other-services"
-                          className="block py-1 hover:text-[#538e79]"
-                          onClick={closeMobileMenu}
-                        >
-                          Other Services
-                        </Link>
-                      </li>
+  <Link href="/lawn-mowing" className="block px-4 py-2 hover:bg-[#538e79]/20">
+    Lawn Mowing
+  </Link>
+</li>
+<li>
+  <Link href="/hedge-trimming" className="block px-4 py-2 hover:bg-[#538e79]/20">
+    Hedge Trimming
+  </Link>
+</li>
+<li>
+  <Link href="/general-gardening" className="block px-4 py-2 hover:bg-[#538e79]/20">
+    General Gardening
+  </Link>
+</li>
+
                     </ul>
                   )}
                 </li>

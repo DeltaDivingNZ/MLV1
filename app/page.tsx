@@ -1,26 +1,22 @@
 // app/page.tsx
 export const metadata = {
-  title: "Delta Detailing – Premium Car Detailing NZ",
-  description: "Professional car detailing services in New Zealand. Make your car shine inside and out!",
+  title: "Matt’s Lawns – Reliable Lawn Mowing & Garden Care",
+  description:
+    "Professional lawn mowing and garden maintenance. One-off jobs or regular care you can rely on.",
   openGraph: {
-    title: "Delta Detailing – Premium Car Detailing NZ",
-    description: "Professional car detailing services in New Zealand. Make your car shine inside and out!",
-    url: "https://www.deltadetailing.co.nz",
+    title: "Matt’s Lawns – Reliable Lawn Care",
+    description:
+      "Professional lawn mowing and garden maintenance. Get a free quote today.",
+    url: "https://www.mattslawns.co.nz",
     images: [
       {
-        url: "https://www.deltadetailing.co.nz/images/home-preview.jpg", // Replace with your homepage OG image
+        url: "https://www.mattslawns.co.nz/images/home-preview.jpg",
         width: 1200,
         height: 630,
-        alt: "Delta Detailing – Car Detailing Services",
+        alt: "Matt’s Lawns – Lawn Mowing Services",
       },
     ],
     type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Delta Detailing – Premium Car Detailing NZ",
-    description: "Professional car detailing services in New Zealand. Make your car shine inside and out!",
-    images: ["https://www.deltadetailing.co.nz/images/home-preview.jpg"],
   },
 };
 

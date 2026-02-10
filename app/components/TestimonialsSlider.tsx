@@ -1,192 +1,63 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
+import { FaQuoteLeft } from "react-icons/fa";
 
-type Testimonial = {
-  name: string;
-  location: string;
-  text: string;
-  rating: number; // 1–5
-};
-
-// 🔹 This can later be replaced by CMS / API data
-const testimonials: Testimonial[] = [
+const testimonials = [
   {
-    name: "John D.",
-    location: "Marton",
-    text: "Never seen my car look like this before. Absolute top-tier work.",
-    rating: 5
+    name: "Sarah T.",
+    feedback:
+      "Matt’s Lawns transformed our garden! Our hedges and lawn have never looked so tidy. Highly recommend!",
   },
   {
-    name: "Sarah W.",
-    location: "Feilding",
-    text: "Exceptional attention to detail and great communication throughout.",
-    rating: 5
+    name: "James L.",
+    feedback:
+      "Reliable and professional. The team mowed our lawn, trimmed edges, and left everything spotless.",
   },
   {
-    name: "Mike T.",
-    location: "Sanson",
-    text: "Went above and beyond under tight time pressure. Highly recommend.",
-    rating: 5
+    name: "Emily R.",
+    feedback:
+      "Excellent service! They cleaned up my garden, removed green waste, and even suggested improvements for next season.",
   },
-  {
-    name: "Emma P.",
-    location: "Bulls",
-    text: "We use Delta Detailing regularly — consistently flawless results.",
-    rating: 5
-  },
-  {
-    name: "Tom R.",
-    location: "Palmerston North",
-    text: "Wouldn’t trust my vehicle with anyone else.",
-    rating: 5
-  }
 ];
 
 export default function TestimonialsSlider() {
-  const [index, setIndex] = useState(0);
-  const [direction, setDirection] = useState<"next" | "prev">("next");
-  const [animating, setAnimating] = useState(false);
-  const [paused, setPaused] = useState(false);
+  const [current, setCurrent] = useState(0);
+  const length = testimonials.length;
 
-  const touchStartX = useRef<number | null>(null);
-  const heightRef = useRef<HTMLDivElement>(null);
-  const [height, setHeight] = useState<number | undefined>();
-
-  const testimonial = testimonials[index];
-
-  /* -------------------- Animation helpers -------------------- */
-
-  const animateTo = (newIndex: number, dir: "next" | "prev") => {
-    if (animating) return;
-    setDirection(dir);
-    setAnimating(true);
-    setTimeout(() => {
-      setIndex(newIndex);
-      setAnimating(false);
-    }, 300);
+  const nextSlide = () => {
+    setCurrent(current === length - 1 ? 0 : current + 1);
   };
 
-  const next = () =>
-    animateTo((index + 1) % testimonials.length, "next");
-
-  const prev = () =>
-    animateTo((index - 1 + testimonials.length) % testimonials.length, "prev");
-
-  /* -------------------- Auto cycle -------------------- */
-
-  useEffect(() => {
-    if (paused) return;
-    const interval = setInterval(next, 5000);
-    return () => clearInterval(interval);
-  }, [paused, index]);
-
-  /* -------------------- Auto height -------------------- */
-
-  useEffect(() => {
-    if (heightRef.current) {
-      setHeight(heightRef.current.offsetHeight);
-    }
-  }, [index]);
-
-  /* -------------------- Swipe support -------------------- */
-
-  const onTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX;
+  const prevSlide = () => {
+    setCurrent(current === 0 ? length - 1 : current - 1);
   };
 
-  const onTouchEnd = (e: React.TouchEvent) => {
-    if (touchStartX.current === null) return;
-    const diff = touchStartX.current - e.changedTouches[0].clientX;
-    if (diff > 50) next();
-    if (diff < -50) prev();
-    touchStartX.current = null;
-  };
+  if (!Array.isArray(testimonials) || testimonials.length === 0) return null;
 
   return (
-    <section className="bg-[#0e0e0e] py-24 overflow-hidden">
-      <h2 className="text-4xl font-bold text-center text-[#538e79] mb-12">
-        What Our Customers Say
-      </h2>
+    <section className="py-20 bg-[#f6faf7] font-body text-[#1f2933]">
+      <div className="max-w-4xl mx-auto px-6 text-center space-y-8">
 
-      <div
-        className="max-w-3xl mx-auto text-center px-6"
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
-        onTouchStart={onTouchStart}
-        onTouchEnd={onTouchEnd}
-        style={{ height }}
-      >
-        <div
-          ref={heightRef}
-          className={`transition-all duration-300 transform ${
-            animating
-              ? direction === "next"
-                ? "-translate-x-8 opacity-0 scale-95"
-                : "translate-x-8 opacity-0 scale-95"
-              : "translate-x-0 opacity-100 scale-100"
-          }`}
-        >
-          {/* ⭐ Stars */}
-          <div className="flex justify-center gap-1 mb-4">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <span
-                key={i}
-                className={`text-xl ${
-                  i < testimonial.rating
-                    ? "text-yellow-400"
-                    : "text-gray-600"
-                }`}
-              >
-                ★
-              </span>
-            ))}
-          </div>
+        <h2 className="text-4xl md:text-5xl font-bold text-green-700">
+          What Our Customers Say
+        </h2>
 
-          <p className="text-xl text-[#d4d4d4] italic leading-relaxed">
-            “{testimonial.text}”
-          </p>
+        <div className="relative bg-white rounded-xl shadow p-10 space-y-4">
+          <FaQuoteLeft className="text-green-700 w-10 h-10 mx-auto" />
 
-          <p className="mt-6 font-semibold text-[#93afbd]">
-            {testimonial.name} — {testimonial.location}
-          </p>
-        </div>
+          <p className="text-[#4b5563] text-lg">{testimonials[current].feedback}</p>
+          <p className="font-semibold text-green-700">— {testimonials[current].name}</p>
 
-        {/* Controls */}
-        <div className="flex justify-center gap-10 mt-10">
-          <button
-            onClick={prev}
-            className="text-3xl font-bold text-[#538e79] hover:text-[#437564] transition"
-            aria-label="Previous testimonial"
-          >
+          {/* Arrows */}
+          <div className="absolute top-1/2 transform -translate-y-1/2 left-6 cursor-pointer text-green-700 text-2xl" onClick={prevSlide}>
             ‹
-          </button>
-          <button
-            onClick={next}
-            className="text-3xl font-bold text-[#538e79] hover:text-[#437564] transition"
-            aria-label="Next testimonial"
-          >
+          </div>
+          <div className="absolute top-1/2 transform -translate-y-1/2 right-6 cursor-pointer text-green-700 text-2xl" onClick={nextSlide}>
             ›
-          </button>
+          </div>
         </div>
 
-        {/* Progress dots */}
-        <div className="flex justify-center gap-3 mt-6">
-          {testimonials.map((_, i) => (
-            <button
-              key={i}
-              onClick={() =>
-                animateTo(i, i > index ? "next" : "prev")
-              }
-              className={`w-3 h-3 rounded-full transition ${
-                i === index
-                  ? "bg-[#538e79]"
-                  : "bg-[#3a3a3a] hover:bg-[#538e79]/60"
-              }`}
-              aria-label={`Go to testimonial ${i + 1}`}
-            />
-          ))}
-        </div>
       </div>
     </section>
   );

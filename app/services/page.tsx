@@ -1,111 +1,66 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const coreServices = [
+const services = [
   {
-    title: "Premium Interior Detail",
-    price: "From $89",
-    image: "/services/premium-interior.jpg",
+    title: "Lawn Mowing",
+    description:
+      "Professional lawn mowing with clean edges, tidy finishes, and reliable service.",
+    image: "/images/lawn-mowing.jpg",
+    href: "/lawn-mowing",
     items: [
-      "Interior vacuumed",
-      "Interior surfaces wiped down",
-      "Inside windows cleaned",
-      "Interior plastics & vinyl dressed",
-      "Floor mats shampooed (if applicable)",
-      "Rubber mats cleaned & dressed (if applicable)",
+      "Regular or one-off mowing",
+      "Edging & line trimming",
+      "Paths and driveways blown down",
     ],
   },
   {
-    title: "Premium Exterior Detail",
-    price: "From $99",
-    image: "/services/premium-exterior.jpg",
+    title: "Hedge Trimming",
+    description:
+      "Keep your hedges and shrubs neat, healthy, and under control year-round.",
+    image: "/images/hedge-trimming.jpg",
+    href: "/hedge-trimming",
     items: [
-      "Snow foam pre-wash",
-      "High pressure rinse",
-      "Vehicle hand washed",
-      "Door jambs cleaned",
-      "Wheel faces & tyres dressed",
-      "Exterior plastics dressed",
-      "Protective coating applied",
+      "Hedge & shrub trimming",
+      "Height reduction",
+      "Green waste removal",
     ],
   },
   {
-    title: "Ultimate Interior Detail",
-    price: "From $139",
-    image: "/services/ultimate-interior.jpg",
+    title: "General Gardening",
+    description:
+      "Garden clean-ups and maintenance for homes, rentals, and pre-sale properties.",
+    image: "/images/general-gardening.jpg",
+    href: "/general-gardening",
     items: [
-      "Everything in Premium Interior Detail",
-      "Full upholstery shampoo",
-      "Leather clean & conditioning (if applicable)",
+      "Weeding & garden clean-ups",
+      "Green waste removal",
+      "Ongoing garden maintenance",
     ],
-  },
-  {
-    title: "Ultimate Exterior Detail",
-    price: "From $179",
-    image: "/services/ultimate-exterior.jpg",
-    items: [
-      "Everything in Premium Exterior Detail",
-      "Clay bar decontamination",
-      "Iron & fallout removal",
-      "Machine cut & polish",
-    ],
-  },
-];
-
-const additionalServices = [
-  {
-    title: "Full Paint Correction",
-    price: "From $299",
-    description:
-      "Multi-stage machine polishing to remove swirls, scratches, and oxidation, restoring deep gloss.",
-  },
-  {
-    title: "Ceramic Coating",
-    price: "From $499",
-    description:
-      "Long-lasting protection with extreme gloss, hydrophobic properties, and UV resistance.",
-  },
-  {
-    title: "Headlight Restoration",
-    price: "From $79",
-    description:
-      "Removes oxidation and cloudiness to improve clarity, safety, and appearance.",
-  },
-  {
-    title: "Engine Bay Detail",
-    price: "From $59",
-    description:
-      "Careful cleaning and dressing for a clean, factory-fresh engine bay.",
-  },
-  {
-    title: "Pre-Sale Detail",
-    price: "From $199",
-    description:
-      "A comprehensive detail designed to maximise your vehicle’s resale value.",
   },
 ];
 
 export default function ServicesPage() {
   return (
-    <section className="bg-[#0f1412] py-20 font-montserrat">
-      <div className="max-w-6xl mx-auto px-4 space-y-20">
+    <section className="bg-[#f6faf7] py-20 font-body text-[#1f2933]">
+      <div className="max-w-7xl mx-auto px-6 space-y-20">
 
         {/* Header */}
         <div className="text-center space-y-4">
-          <h1 className="text-4xl md:text-5xl font-bold font-playfair text-[#538e79]">
+          <h1 className="text-4xl md:text-5xl font-bold text-green-700">
             Our Services
           </h1>
-          <p className="text-[#8aa4b2] max-w-2xl mx-auto text-lg md:text-xl">
-            Premium car detailing with military precision. Mobile or at our Marton location.
+          <p className="max-w-2xl mx-auto text-lg text-[#4b5563]">
+            Reliable lawn care and garden maintenance to keep your property looking its best.
           </p>
         </div>
 
-        {/* Core Services */}
-        <div className="grid md:grid-cols-2 gap-10">
-          {coreServices.map((service) => (
+        {/* Services Grid */}
+        <div className="grid md:grid-cols-3 gap-10">
+          {services.map((service) => (
             <div
               key={service.title}
-              className="bg-[#151b18] rounded-lg shadow hover:shadow-xl transition overflow-hidden"
+              className="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden flex flex-col"
             >
               <div className="relative h-56 w-full">
                 <Image
@@ -116,64 +71,42 @@ export default function ServicesPage() {
                 />
               </div>
 
-              <div className="p-6 space-y-4">
-                <div>
-                  <h2 className="text-2xl font-bold font-playfair text-[#538e79]">
-                    {service.title}
-                  </h2>
-                  <p className="text-[#8aa4b2] font-semibold">{service.price}</p>
-                </div>
+              <div className="p-6 space-y-4 flex-1">
+                <h2 className="text-2xl font-bold text-green-700">
+                  {service.title}
+                </h2>
 
-                <ul className="list-disc list-inside space-y-1 text-[#8aa4b2]">
+                <p className="text-[#4b5563]">
+                  {service.description}
+                </p>
+
+                <ul className="list-disc list-inside space-y-1 text-[#374151]">
                   {service.items.map((item) => (
                     <li key={item}>{item}</li>
                   ))}
                 </ul>
+              </div>
 
+              <div className="p-6 pt-0">
                 <Link
-                  href={`/booking?service=${encodeURIComponent(service.title)}`}
-                  className="inline-block bg-[#538e79] text-white px-6 py-2 rounded hover:bg-[#466f60] transition font-semibold"
+                  href={service.href}
+                  className="inline-block text-green-700 font-semibold hover:underline"
                 >
-                  Book This Service
+                  Learn More →
                 </Link>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Additional Services */}
-        <div className="space-y-10">
-          <h2 className="text-3xl md:text-4xl font-bold font-playfair text-[#538e79] text-center">
-            Additional Services
-          </h2>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            {additionalServices.map((service) => (
-              <div
-                key={service.title}
-                className="bg-[#151b18] p-6 rounded-lg shadow hover:shadow-lg transition"
-              >
-                <div className="flex justify-between items-start gap-4">
-                  <div>
-                    <h3 className="text-xl font-bold font-playfair text-[#538e79]">
-                      {service.title}
-                    </h3>
-                    <p className="text-[#8aa4b2] mt-2">{service.description}</p>
-                  </div>
-                  <span className="text-[#93afbd] font-semibold whitespace-nowrap">
-                    {service.price}
-                  </span>
-                </div>
-
-                <Link
-                  href={`/booking?service=${encodeURIComponent(service.title)}`}
-                  className="inline-block mt-4 text-[#538e79] font-semibold hover:underline"
-                >
-                  Enquire / Book →
-                </Link>
-              </div>
-            ))}
-          </div>
+        {/* Call to Action */}
+        <div className="text-center">
+          <Link
+            href="/quote"
+            className="inline-block bg-green-700 text-white px-8 py-4 rounded-lg font-semibold hover:bg-green-800 transition"
+          >
+            Request a Free Quote
+          </Link>
         </div>
 
       </div>
