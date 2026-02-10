@@ -30,20 +30,22 @@ export default function Hero() {
           Professional lawn care and gardening services to keep your property neat, healthy, and looking its best.
         </p>
 
-        <div className="space-x-4">
-          <Link
-            href="/quote"
-            className="inline-block bg-green-700 text-white px-6 py-3 rounded font-semibold hover:bg-green-800 transition"
-          >
-            Get a Free Quote
-          </Link>
-          <Link
-            href="/services"
-            className="inline-block bg-white text-green-700 px-6 py-3 rounded font-semibold hover:bg-gray-100 transition"
-          >
-            Explore Services
-          </Link>
-        </div>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+  <Link
+    href="/quote"
+    className="inline-block bg-green-700 text-white px-6 py-3 rounded font-semibold hover:bg-green-800 transition"
+  >
+    Get a Free Quote
+  </Link>
+
+  <Link
+    href="/services"
+    className="inline-block bg-white text-green-700 px-6 py-3 rounded font-semibold hover:bg-gray-100 transition"
+  >
+    Explore Services
+  </Link>
+</div>
+
       </div>
 
     </section>
